@@ -7,6 +7,7 @@ sky-take-away      maven父工程，统一管理依赖版本，聚合其他字�
 —— sky-pojo        子模块，存放实体类，VO、DTO等
 —— sky-server      子模块，后端服务，存放配置文件、Controller、Service、Mapper等
 
+-- 单纯因为懒得给他们分开了，直接放一起了，这assets和web-manager可以单独放一个地方
 —— assets          放一些资源，主要是为了方在一块，例如：sql文件，接口文件等
 —— web-manager     前端资源，用nginx启动已经已经弄好的前端项目，
 ```
