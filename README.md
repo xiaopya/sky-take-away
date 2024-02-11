@@ -19,10 +19,10 @@ sky-take-away      maven父工程，统一管理依赖版本，聚合其他字�
 1. 数据库以及表创建 
    2. 打开assets文件，找到sky.sql在数据库可视化界面中执行即可
       employee表中，就是前端登陆的账号密码，默认：<a>admin/123456</a>
-   ![img_3.png](img_3.png)
+      ![img_3](https://raw.githubusercontent.com/xiaopya/typora/master/Typora202402111735889.png)
 2. 打开 sky-server/src/main/resources/application-dev.yml 文件，将里面的数据库账号密码改成自己的
-   ![img.png](img.png)
+   ![img](https://raw.githubusercontent.com/xiaopya/typora/master/Typora202402111736377.png)
 3. 然后在maven中点击 sky-take-away下的 Lifecycle里面的compile
-   ![img_1.png](img_1.png)
+   ![img_1](https://raw.githubusercontent.com/xiaopya/typora/master/Typora202402111736044.png)
 4. 最后启动sky-server下的启动类（就是SkyApplication java文件）
-   ![img_2.png](img_2.png)
+   ![img_2](https://raw.githubusercontent.com/xiaopya/typora/master/Typora202402111736007.png)
