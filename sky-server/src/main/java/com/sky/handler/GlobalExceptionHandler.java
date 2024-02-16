@@ -11,6 +11,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
  * 全局异常处理器，处理项目中抛出的业务异常
+ * @author cyl
  */
 @RestControllerAdvice
 @Slf4j
@@ -18,7 +19,6 @@ public class GlobalExceptionHandler {
 
     /**
      * 捕获业务异常
-     *
      * @param ex
      * @return
      */
@@ -28,6 +28,11 @@ public class GlobalExceptionHandler {
         return Result.error(ex.getMessage());
     }
 
+    /**
+     * 单独为已经存在的数据做错误处理
+     * @param ex
+     * @return
+     */
     @ExceptionHandler
     public Result exceptionHandler(SQLIntegrityConstraintViolationException ex) {
         String msg = ex.getMessage();

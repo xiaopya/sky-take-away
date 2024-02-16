@@ -18,11 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Base64Utils;
 import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 @Slf4j
 @Service
@@ -33,9 +31,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 员工登录
-     *
-     * @param employeeLoginDTO
-     * @return
      */
     @Override
     public Employee login(EmployeeLoginDTO employeeLoginDTO) {
@@ -69,6 +64,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
+    /**
+     * 员工新增
+     */
     @Override
     public void save(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
@@ -91,8 +89,44 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.insert(employee);
     }
 
+    /**
+     * 员工列表分页
+     */
     @Override
     public Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
         return employeeMapper.pageQuery(employeePageQueryDTO);
+    }
+
+    /**
+     * 员工账户 启用or禁用
+     */
+    @Override
+    public void accountStartupOrDisable(Integer status, long id) {
+
+        Employee employee = Employee.builder().status(status).id(id).build();
+
+        employeeMapper.update(employee);
+    }
+
+    /**
+     * 员工详情
+     */
+    @Override
+    public Employee getByUserId(long id) {
+        Employee employee = employeeMapper.getByUserId(id);
+        employee.setPassword("******");
+        return employee;
+    }
+
+    /**
+     * 员工更新
+     */
+    @Override
+    public void update(EmployeeDTO employeeDTO){
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO,employee);
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        employeeMapper.update(employee);
     }
 }

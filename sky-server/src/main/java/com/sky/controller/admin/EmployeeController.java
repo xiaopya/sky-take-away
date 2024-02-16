@@ -100,4 +100,27 @@ public class EmployeeController {
         return Result.success(pageResult);
     }
 
+    @PostMapping("/status/{status}")
+    @ApiOperation("员工账号控制")
+    public Result accountStartupOrDisable(@PathVariable Integer status,long id){
+        log.info("员工账号启用or禁用：{}{}",status,id);
+        employeeService.accountStartupOrDisable(status,id);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("员工信息")
+    public Result<Employee> getByUserId(@PathVariable long id){
+        log.info("获取用户信息：{}",id);
+        Employee employee =  employeeService.getByUserId(id);
+        return Result.success(employee);
+    }
+
+    @PutMapping
+    @ApiOperation("编辑员工")
+    public Result update(@RequestBody EmployeeDTO employeeDTO){
+        log.info("编辑员工信息：{}",employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
 }
