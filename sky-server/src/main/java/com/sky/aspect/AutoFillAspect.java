@@ -43,7 +43,7 @@ public class AutoFillAspect {
      */
     @Before("autoFillPointCut()")
     public void autoFill(JoinPoint joinPoint)  {
-        log.info("对公共字段进行赋值");
+        log.info("对公共字段进行赋值.");
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         AutoFill autoFill = signature.getMethod().getAnnotation(AutoFill.class);
         OperationType operationType = autoFill.value();
