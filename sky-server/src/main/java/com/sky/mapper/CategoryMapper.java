@@ -6,6 +6,9 @@ import com.sky.entity.Category;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface CategoryMapper {
@@ -21,4 +24,7 @@ public interface CategoryMapper {
     void delete(long id);
 
     void update(Category category);
+
+    @Select("select * from category where type = #{type} and status != '0'")
+    List<Category> list(Integer type);
 }

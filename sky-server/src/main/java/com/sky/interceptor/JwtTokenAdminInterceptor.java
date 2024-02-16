@@ -55,6 +55,7 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
             return true;
         } catch (Exception ex) {
             //4、不通过，响应401状态码
+            log.info("jwt令牌过期,重新登录");
             response.setStatus(401);
             return false;
         }
