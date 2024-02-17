@@ -1,6 +1,7 @@
 package com.sky.service.impl;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.sky.constant.MessageConstant;
 import com.sky.constant.StatusConstant;
 import com.sky.context.BaseContext;
@@ -11,6 +12,7 @@ import com.sky.exception.DeletionNotAllowedException;
 import com.sky.mapper.CategoryMapper;
 import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealMapper;
+import com.sky.result.PageResult;
 import com.sky.service.CategoryService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * @projectName: sky-take-away
- * @package: com.sky.service.impl
- * @className: CategoryServiceImpl
  * @author: cyl
  * @description: TODO 分类功能实现类
  * @date: 2024/2/16 20:04
@@ -54,8 +53,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Page<Category> pageQuery(CategoryPageQueryDTO categoryPageQueryDTO) {
-        return categoryMapper.pageQuery(categoryPageQueryDTO);
+    public PageResult pageQuery(CategoryPageQueryDTO categoryPageQueryDTO) {
+        PageHelper.startPage(categoryPageQueryDTO.getPage(),categoryPageQueryDTO.getPageSize());
+        Page<Category> page = categoryMapper.pageQuery(categoryPageQueryDTO);
+        long total = page.getTotal();
+        List<Category> result = page.getResult();
+        return new PageResult(total, result);
     }
 
     @Override

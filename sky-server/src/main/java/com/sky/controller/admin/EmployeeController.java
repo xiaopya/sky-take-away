@@ -90,13 +90,7 @@ public class EmployeeController {
     @GetMapping("/page")
     @ApiOperation("员工列表")
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO) {
-        PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
-
-        Page<Employee> page = employeeService.pageQuery(employeePageQueryDTO);
-        long total = page.getTotal();
-        List<Employee> records = page.getResult();
-        PageResult pageResult = new PageResult(total, records);
-
+        PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
     }
 

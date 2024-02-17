@@ -6,3 +6,6 @@ sky:
     database: sky_take_away
     username: root
     password: 962464
+  alioss:
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    bucketName: xiaopy-store

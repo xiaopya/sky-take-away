@@ -48,13 +48,9 @@ public class CategoryController {
 
     @GetMapping("/page")
     @ApiOperation("分类列表")
-    public Result page(CategoryPageQueryDTO categoryPageQueryDTO) {
+    public Result<PageResult> page(CategoryPageQueryDTO categoryPageQueryDTO) {
         log.info("分页查询分类: {}", categoryPageQueryDTO);
-        PageHelper.startPage(categoryPageQueryDTO.getPage(), categoryPageQueryDTO.getPageSize());
-        Page<Category> page = categoryService.pageQuery(categoryPageQueryDTO);
-        long total = page.getTotal();
-        List<Category> records = page.getResult();
-        PageResult pageResult = new PageResult(total, records);
+        PageResult pageResult = categoryService.pageQuery(categoryPageQueryDTO);
         return Result.success(pageResult);
     }
 
