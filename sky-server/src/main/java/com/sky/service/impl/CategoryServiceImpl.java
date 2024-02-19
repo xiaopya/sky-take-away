@@ -42,10 +42,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void save(CategoryDTO categoryDTO) {
         Category category = Category.builder()
-//                .createTime(LocalDateTime.now())
-//                .updateTime(LocalDateTime.now())
-//                .createUser(BaseContext.getCurrentId())
-//                .updateUser(BaseContext.getCurrentId())
                 .status(StatusConstant.DISABLE)
                 .build();
         BeanUtils.copyProperties(categoryDTO, category);

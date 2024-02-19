@@ -72,4 +72,10 @@ public class DishController {
         dishService.dishStartupOrDisable(status,id);
         return Result.success();
     }
+
+    @GetMapping("/list")
+    public Result<List<Dish>> list(Long categoryId){
+        List<Dish> list = dishService.list(categoryId);
+        return Result.success(list);
+    }
 }

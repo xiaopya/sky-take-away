@@ -38,4 +38,9 @@ public interface DishService {
      * 菜品起售/禁售
      */
     void dishStartupOrDisable(Integer status, Long id);
+
+    /**
+     * 根据分类查询
+     */
+    List<Dish> list(Long categoryId);
 }
