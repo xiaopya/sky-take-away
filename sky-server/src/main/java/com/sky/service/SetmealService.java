@@ -17,4 +17,24 @@ public interface SetmealService {
      * 套餐列表
      */
     PageResult pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
+
+    /**
+     * 套餐详情
+     */
+    SetmealDTO getById(Long id);
+
+    /**
+     * 套餐更新
+     */
+    void update(SetmealDTO setmealDTO);
+
+    /**
+     * 设置起售、禁售状态
+     */
+    void setStatus(Integer status, Long id);
+
+    /**
+     * 批量删除
+     */
+    void deleteBatch(List<Long> ids);
 }
