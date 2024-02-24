@@ -36,6 +36,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void add(ShoppingCartDTO shoppingCartDTO) {
-        shoppingCartMapper.add(shoppingCartDTO);
+//        shoppingCartMapper.add(shoppingCartDTO);
     }
 }
