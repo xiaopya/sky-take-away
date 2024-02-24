@@ -50,7 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public PageResult pageQuery(CategoryPageQueryDTO categoryPageQueryDTO) {
-        PageHelper.startPage(categoryPageQueryDTO.getPage(),categoryPageQueryDTO.getPageSize());
+        PageHelper.startPage(categoryPageQueryDTO.getPage(), categoryPageQueryDTO.getPageSize());
         Page<Category> page = categoryMapper.pageQuery(categoryPageQueryDTO);
         long total = page.getTotal();
         List<Category> result = page.getResult();
@@ -61,12 +61,12 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteCategoryById(long id) {
         // 判断当前分类是否关联到菜品
         Integer count = dishMapper.countByCategoryId(id);
-        if(count > 0){
+        if (count > 0) {
             throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_DISH);
         }
         // 判断当前分类是否关联到套餐
         count = setmealMapper.countByCategoryId(id);
-        if(count > 0){
+        if (count > 0) {
             throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_SETMEAL);
         }
         categoryMapper.delete(id);
@@ -87,12 +87,17 @@ public class CategoryServiceImpl implements CategoryService {
 //                .updateTime(LocalDateTime.now())
 //                .updateUser(BaseContext.getCurrentId())
                 .build();
-        BeanUtils.copyProperties(categoryDTO,category);
+        BeanUtils.copyProperties(categoryDTO, category);
         categoryMapper.update(category);
     }
 
     @Override
     public List<Category> list(Integer type) {
         return categoryMapper.list(type);
+    }
+
+    @Override
+    public List<Category> listAll() {
+        return categoryMapper.listAll();
     }
 }

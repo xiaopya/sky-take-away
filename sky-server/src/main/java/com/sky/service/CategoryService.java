@@ -37,4 +37,6 @@ public interface CategoryService{
      * 根据id查询分类
      */
     List<Category> list(Integer type);
+
+    List<Category> listAll();
 }

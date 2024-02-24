@@ -44,7 +44,7 @@ sky:
     # 设置前端传递过来的令牌名称
     admin-token-name: token
     # 用户端(小程序)
-    user-secret-key: itxiaopy_user
+    user-secret-key: itxiaopy
     user-ttl: 7200000
     user-token-name: authorization
   alioss:

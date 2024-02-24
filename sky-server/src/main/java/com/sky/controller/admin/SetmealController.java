@@ -19,7 +19,7 @@ import java.util.List;
  * @description: TODO
  * @date: 2024/2/19 19:46
  */
-@RestController
+@RestController("adminSetmealController")
 @RequestMapping("/admin/setmeal")
 @Slf4j
 @Api("套餐操作接口")

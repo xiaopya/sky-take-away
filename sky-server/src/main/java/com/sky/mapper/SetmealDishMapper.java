@@ -24,4 +24,7 @@ public interface SetmealDishMapper {
 
     @Select("select status from dish where id in (select dish_id from setmeal_dish where setmeal_id = #{setmealId})")
     List<Integer> getBySetmealAndDishStatus(Long setmealId);
+
+    @Select("select * from setmeal_dish where setmeal_id = #{setmealId}")
+    List<SetmealDish> getByCategoryId(Long setmealId);
 }

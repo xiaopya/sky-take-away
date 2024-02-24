@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * 员工管理
  */
-@RestController
+@RestController("adminEmployeeController")
 @RequestMapping("/admin/employee")
 @Slf4j
 @Api("员工操作接口")

@@ -142,4 +142,14 @@ public class SetmealServiceImpl implements SetmealService {
             setmealDishMapper.deleteBysSetmeal(id);
         }
     }
+
+    @Override
+    public List<SetmealVO> list(Long categoryId) {
+        return setmealMapper.getByCategoryId(categoryId);
+    }
+
+    @Override
+    public List<SetmealDish> getByCategoryId(Long categoryId) {
+        return setmealDishMapper.getByCategoryId(categoryId);
+    }
 }

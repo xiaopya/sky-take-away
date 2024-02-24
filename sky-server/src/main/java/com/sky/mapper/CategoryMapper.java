@@ -31,4 +31,7 @@ public interface CategoryMapper {
 
     @Select("select * from category where type = #{type} and status != '0'")
     List<Category> list(Integer type);
+
+    @Select("select * from category")
+    List<Category> listAll();
 }

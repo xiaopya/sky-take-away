@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @description: TODO 通用接口
  * @date: 2024/2/17 14:30
  */
-@RestController
+@RestController("adminCommonController")
 @RequestMapping("/admin/common")
 @Slf4j
 @Api("通用接口")
