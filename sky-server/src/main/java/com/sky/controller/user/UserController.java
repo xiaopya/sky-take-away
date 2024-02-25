@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * @author: cyl
- * @description: TODO
+ * @description: TODO 微信登录
  * @date: 2024/2/22 19:44
  */
 @RestController
