@@ -46,7 +46,11 @@ public class ShoppingCartController {
         List<ShoppingCart> list = shoppingCartService.list();
         return Result.success(list);
     }
-
+    /**
+     * 删除购物车
+     * @param shoppingCartDTO 购物车信息
+     * @return 结果对象
+     */
     @PostMapping("/sub")
     public Result delete(@RequestBody ShoppingCartDTO shoppingCartDTO){
         log.info("修改购物车数量：{}",shoppingCartDTO);
