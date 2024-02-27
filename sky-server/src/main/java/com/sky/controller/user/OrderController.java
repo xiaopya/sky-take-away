@@ -4,11 +4,12 @@ import com.sky.dto.OrdersPaymentDTO;
 import com.sky.dto.OrdersSubmitDTO;
 import com.sky.result.Result;
 import com.sky.service.OrdersPaymentService;
+import com.sky.vo.OrderSubmitVO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author: cyl
@@ -30,8 +31,10 @@ public class OrderController {
      * @param ordersPaymentDTO 订单支付信息
      * @return 订单支付结果
      */
-    public Result<OrdersSubmitDTO> submit(OrdersSubmitDTO ordersSubmitDTO){
-        OrdersSubmitDTO submitOrder = ordersPaymentService.submitOrder(ordersSubmitDTO);
+    @PostMapping("/submit")
+    @ApiOperation("用户下单")
+    public Result<OrderSubmitVO> submit(@RequestBody OrdersSubmitDTO ordersSubmitDTO){
+        OrderSubmitVO submitOrder = ordersPaymentService.submitOrder(ordersSubmitDTO);
         return Result.success(submitOrder);
     }
 }

@@ -5,18 +5,22 @@ import com.sky.context.BaseContext;
 import com.sky.dto.OrdersPaymentDTO;
 import com.sky.dto.OrdersSubmitDTO;
 import com.sky.entity.AddressBook;
+import com.sky.entity.OrderDetail;
 import com.sky.entity.Orders;
 import com.sky.entity.ShoppingCart;
 import com.sky.exception.AddressBookBusinessException;
 import com.sky.exception.ShoppingCartBusinessException;
 import com.sky.mapper.*;
 import com.sky.service.OrdersPaymentService;
+import com.sky.vo.OrderSubmitVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,7 +53,8 @@ public class OrdersPaymentServiceImpl implements OrdersPaymentService {
      * @return 订单提交数据
      */
     @Override
-    public OrdersSubmitDTO submitOrder(OrdersSubmitDTO ordersSubmitDTO) {
+    @Transactional
+    public OrderSubmitVO submitOrder(OrdersSubmitDTO ordersSubmitDTO) {
 
         // 处理地址异常
         AddressBook addressBook = addressBookMapper.getById(ordersSubmitDTO.getAddressBookId());
@@ -79,7 +84,26 @@ public class OrdersPaymentServiceImpl implements OrdersPaymentService {
 
         orderMapper.insert(orders);
 
-        return null;
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        // 往订单表插入数据
+        for (ShoppingCart shoppingCart : shoppingCarts) {
+            OrderDetail orderDetail = new OrderDetail();
+            BeanUtils.copyProperties(shoppingCart,orderDetail);
+            // 设置订单id
+            orderDetail.setOrderId(orders.getId());
+            orderDetails.add(orderDetail);
+        }
+        orderDetailMapper. insertBatch(orderDetails);
+
+        // 清空购物车
+        shoppingCartMapper.deleteByUserId(userId);
+
+        return OrderSubmitVO.builder()
+                .id(orders.getId())
+                .orderTime(orders.getOrderTime())
+                .orderNumber(orders.getNumber())
+                .orderAmount(orders.getAmount())
+                .build();
     }
 
     /**
